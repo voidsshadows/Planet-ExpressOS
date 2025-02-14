@@ -1,3 +1,11 @@
+# ATTENTION: Outdated Version!  
+
+### This is an old fork of the original GitHub repository which isn't maintained / up to date! 
+
+## The original repository is no longer existent at GitHub, but the author offers the latest version of his original repository here: https://codeberg.org/hedgehogform/Anycubic-Kobra-2-Series-Tools    
+
+---
+
 ## Anycubic Kobra 2 Series Tools
 
 This repository contains tools for the Anycubic Kobra 2 Series 3D printers.
