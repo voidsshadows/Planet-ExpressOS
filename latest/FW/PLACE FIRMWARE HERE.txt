@@ -1,0 +1,1 @@
+Place .bin, .zip, .swu firmwares in this folder.
