@@ -1,5 +1,8 @@
 # Hidden Gcode commands
 
+> [!WARNING]
+> Changing the wrong setting might make your printer unbootable and will need to be recovered from a backup.
+
 To run these custom gcode commands you need to pass
 
 ```gcode
