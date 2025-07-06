@@ -20,7 +20,7 @@ If there are two versions of a script, and one has an -ac in the name, this is t
 
 ## Prerequisites
 
-1. You will need to have jailbroken your printer to accept third-party firmware updates. Please reach out to us on the discord for help with this.
+1. You will need to have jailbroken your printer to accept third-party firmware updates. Please reach out to us on [the OpenCentauri Discord](https://discord.gg/t6Cft3wNJ3) for help with this.
 1. For the technically savvy, this involves replacing the contents of `/etc/swupdate_public.pem` which is the key used to digitally sign firmware updates:
 
     1. Stock ELEGOO firmware signing key:
