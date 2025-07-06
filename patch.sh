@@ -45,6 +45,11 @@ echo 'sshd:x:22:65534:OpenSSH Server:/opt/var/empty:/dev/null' >> ./etc/passwd
 echo Set hostname to OpenCentauri
 sed -re 's|TinaLinux|OpenCentauri|' -i ./etc/config/system
 
+echo 'Update web interface JavaScript and overlay image(s)'
+cat ../../RESOURCES/OpenCentauri/opencentauri-logo-small.png > ./app/www/assets/images/network/logo.png
+# Need to re-size logo width from 160px to 300px so it's not to small, since wider!
+sed -re 's|(logo-img\[.+\])\{width:160px\}|\1{width:300px}|' -i ./app/www/*.js
+
 echo Add OpenCentauri initialization to /etc/rc.local
 sed -r -e '$ d' -i ./etc/rc.local
 cat << EOF >> ./etc/rc.local
@@ -74,5 +79,8 @@ fi
 
 exit 0
 EOF
+
+# TODO: Fix swupdate_cmd.sh -i /mnt/exUDISK/update/update.swu -e stable,now_A_next_B -k /etc/swupdate_public.pem
+# Write log to /mnt/exUDISK/ instead of /mnt/UDISK
 
 cd -

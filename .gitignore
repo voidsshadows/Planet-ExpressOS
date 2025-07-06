@@ -9,3 +9,5 @@ printer*.cfg
 options.cfg
 /emmc_dump
 auto_install.sh
+free_fwupdate.py
+free_root_shell.py
