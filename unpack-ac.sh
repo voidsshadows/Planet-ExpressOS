@@ -1,10 +1,5 @@
 #!/bin/bash
 
-if [ $UID -ne 0 ]; then
-  echo "Error: Please run as root."
-  exit 1
-fi
-
 project_root="$PWD"
 
 # Source the utils.sh file
@@ -37,7 +32,11 @@ fi
 check_tools "cpio unsquashfs unzip ack2_swu_decrypt.py python3"
 
 # set the custom decrypt tool
-DECRYPT_TOOL="TOOLS/cc_swu_decrypt.sh"
+DECRYPT_TOOL=$(which "ack2_swu_decrypt.py")
+if [ -z "$DECRYPT_TOOL" ]; then
+  # if not installed use the local copy
+  DECRYPT_TOOL="TOOLS/ack2_swu_decrypt.py"
+fi
 
 # remove old temp files if present
 rm -rf unpacked

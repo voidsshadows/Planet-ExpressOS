@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ $UID -ne 0 ]; then
+  echo "Error: Please run as root."
+  exit 1
+fi
+
 project_root="$PWD"
 
 # Source the utils.sh file
