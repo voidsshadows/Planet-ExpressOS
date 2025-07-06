@@ -62,7 +62,7 @@ if [ $flash -eq 1 ]; then
     # Update firmware, actually run the swupdate_cmd!!!
     echo "Updating..."
     ssh -p $port $username@$ip "tail -F /mnt/exUDISK/swupdate.log" < /dev/null &
-    echo ssh -p $port $username@$ip "swupdate_cmd.sh -i /mnt/exUDISK/update.swu -e stable,${boot_partition} -k /etc/swupdate_public.pem"
+    ssh -p $port $username@$ip "swupdate_cmd.sh -i /mnt/exUDISK/update.swu -e stable,${boot_partition} -k /etc/swupdate_public.pem"
 else
     echo "To tail log in a different window:"
     echo ssh -p $port $username@$ip "tail -F /mnt/exUDISK/swupdate.log"

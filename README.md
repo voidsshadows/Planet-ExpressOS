@@ -20,21 +20,23 @@ If there are two versions of a script, and one has an -ac in the name, this is t
 ### Option 1: Manual Build
 
 1. Unpack the firmware of choice: (tested with 1.1.25)
-    `sudo ./rc.unpack FW-CentauriCarbon-v1.1.25-2025-05-09.bin`
+    `sudo ./unpack.sh FW-CentauriCarbon-v1.1.25-2025-05-09.bin`
 1. Run this patch set of updates to the squashfs extracted:
-    `sudo ./rc.patch`
+    `sudo ./patch.sh`
 1. Generate a new update.swu:
-    `sudo ./rc.pack`
+    `sudo ./pack.sh`
 
 ### Option 2: Automatic Build
 
 1. Run through all the steps in Option 1:
-    `./rc.build`
+    `./build.sh`
 
 ## Install to Printer
 
-1. Install to the printer (note: have to edit the hostname/IP in this script):
-    `./TOOLS/custom_install.sh`
+1. Install to the printer:
+    1. `./upload.sh [--stage,--flash,--sendit] <printer-ip-or-hostname>`
+    1. Stages, flashes or stages and flashes the file generated in update/update.sw by `pack.sh`.
+    1. Run with no arguments for usage.
 1. Alternative:
     1. Copy update/update.swu to USB stick, in the folder update, file update.swu
-    1. Reboot the printer and it should detect an update is available.
+    1. Reboot the printer and it should detect an update is available!
