@@ -10,6 +10,56 @@ Please note that if a script is not specifically called-out in this README, it p
 
 If there are two versions of a script, and one has an -ac in the name, this is the original AnyCubic version of the file for reference.
 
+## OpenCentauri Features
+
+1. TBD, but for now check out ./patch.sh at the top level of this repo!
+1. Bundled entware with openssh, refreshed branding, lots of quality of life updates for remote access to printer.
+1. Default root password is 'OpenCentauri', although you can ssh-copy-id a key over! You should change this.
+1. By default root shell fromn Sims on port 4567 is available in OpenCentauri for breakglass access, can use with `nc <my-printer-ip-or-host> 4567`.
+1. More to come!!!
+
+## Prerequisites
+
+1. You will need to have jailbroken your printer to accept third-party firmware updates. Please reach out to us on the discord for help with this.
+1. For the technically savvy, this involves replacing the contents of `/etc/swupdate_public.pem` which is the key used to digitally sign firmware updates:
+
+    1. Stock ELEGOO firmware signing key:
+
+        ```pem
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnFBZ/+BuRCESalxGqlEE
+        he3eRigUHAZZdW1nPEQZT/6V1gARirJMzT+KUFKqMgtaQuZTtizB3Uo+PbXXwkEl
+        MaGUwRYHOY5ebTt+DfBBWEXvvklKIoKypWF6ta6B37PyHJz4ssnCcCtQRroOllXm
+        vrYLjt5tinKJUx3XoO6iLYf2R5r6+8FB3J/i1ZhJuwCBDtIsivyxdQSHsH9pX55V
+        MOsWKKyuOVyixL42hwiMxOL8HkmumLVDLeXsl0gp34JRN9tR80H5W5+8TUUXnKst
+        vjf+YfzbKCIvvLl3qjDDZW9AlwrWE1mhfxFA/N2qjDQ2rsoquLPiLm3CDVBlKCUP
+        fwIDAQAB
+        -----END PUBLIC KEY-----
+        ```
+
+    1. OpenCentauri `/etc/swupdate_public.pem` signing key:
+
+        ```pem
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvkLL7VK9svGKBM4Q39uB
+        ZNkkxy6zqQeCInOE3PeIhvRa3teowz7MLiYJi+CI/4q6mPysLCo3lfY+cWFCc+U3
+        2lhhHJZy2+gEoTt0ecEWKIznd1GNaUMJFzHIHPCc4LssZFQ9ahZPPuoU/wYtguxA
+        qPSWsH+SNe8xihy5WRG4363FdvwBQc+Q7DTE7firafCzjfaPuoSClDQsyTcGByxs
+        78s23DXbvQ8jLLlVffLMFD4y9KNbuEdyswe9QEUQar+XEwFm7EkVTX+TAHzHn40s
+        hW+mpfZZgMxJ6a88A527e7DfBlAnt1ZSIh4xXZMlniv40kdXyqSWO/wqJcbmnUTn
+        cQIDAQAB
+        -----END PUBLIC KEY-----
+        ```
+
+## Reverting back to Stock ELEGOO Firmware
+
+1. To revert back, you will need to replace your original key and then flash an official ELEGOO firmware. I recommend 1.1.25 for now since it has the most features, and this is what OpenCentauri is (currently) based on.
+    1. Update the /etc/swupdate_public.pem key in your /etc directory via ssh to the original ELEGOO firmware signing key (above)
+    1. Run the script `./fwdl.sh`, to grab the 1.1.25 Firmware into the FW/ directory
+    1. Copying the new file `FW/FW-CentauriCarbon-v1.1.25-2025-05-09.bin` to your printer's USB stick at the root level, with filename `update.bin`
+    1. Insert USB-stick into printer
+    1. Re-boot your printer, and it should offer to update!
+
 ## Download the Base Firmware
 
 1. Download the 1.1.25 FW to FW/:
@@ -33,10 +83,10 @@ If there are two versions of a script, and one has an -ac in the name, this is t
 
 ## Install to Printer
 
-1. Install to the printer:
+1. Install to the printer (only works if already running OpenCentauri FW to install an update):
     1. `./upload.sh [--stage,--flash,--sendit] <printer-ip-or-hostname>`
     1. Stages, flashes or stages and flashes the file generated in update/update.sw by `pack.sh`.
     1. Run with no arguments for usage.
-1. Alternative:
+1. Alternative (if just jailbroken but not running OpenCentauri yet):
     1. Copy update/update.swu to USB stick, in the folder update, file update.swu
     1. Reboot the printer and it should detect an update is available!
