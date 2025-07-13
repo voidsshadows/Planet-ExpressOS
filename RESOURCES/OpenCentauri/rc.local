@@ -1,0 +1,47 @@
+# Put your custom commands here that should be executed once
+# the system init finished. By default this file does nothing.
+
+# BEGIN: INITIALIZE OpenCentauri and entware
+mkdir -p /user-resource/OpenCentauri/entware \
+         /user-resource/OpenCentauri/root \
+         /opt /root
+mount -o bind /user-resource/OpenCentauri/entware /opt
+mount -o bind /user-resource/OpenCentauri/root /root
+# Bootstrap entware and the root homedir if needed!
+if [ ! -f /opt/etc/entware_release ]; then
+  cd /user-resource &&
+    tar zxvf /app/OpenCentauri-bootstrap.tar.gz
+fi
+# Once entware is properly installed, do the things!
+if [ -f /opt/etc/entware_release ]; then
+  # Update mlocate db now, and every 24 hours!
+  sh -c "while [ 1 ]; do /opt/bin/updatedb; sleep 86400; done" &
+
+  # Generate openssh host keys in /opt/etc/ssh (if needed, else it skips)
+  /opt/bin/ssh-keygen -A
+
+  # Start entware system services, includes openssh
+  /opt/etc/init.d/rc.unslung start
+
+  # Start DHCPD for usb0 network interface if available! If not then don't try.
+  ifconfig usb0 && udhcpc -i usb0 -b -p /tmp/usb0_udhcpc.pid -s /usr/share/udhcpc/default.script -x hostname:Centauri-Carbon &
+
+  # Start wlan0 interface if available
+  /app/oc-startwifi.sh
+fi
+# END: INITIALIZE OpenCentauri and entware
+
+# BEGIN: Centauri Carbon Normal Set-up
+# logread -f -F /board-resource/lastlog &
+if [ -f /app/app ]; then
+    ulimit -c unlimited
+    chmod +x /coredump_helper.sh
+    echo "|/coredump_helper.sh %p %t" | tee /proc/sys/kernel/core_pattern
+    chmod 755 /app/app
+    /app/force-upgrade
+    sleep %OC_APP_BOOT_DELAY% 
+    /app/app &
+fi
+# END: Centauri Carbon Normal Set-up
+
+exit 0

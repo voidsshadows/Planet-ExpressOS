@@ -1,0 +1,5 @@
+#!/opt/bin/bash
+
+kill $(pgrep -f 'sh /etc/rc.local') &>/dev/null && \
+  echo "Successfully killed /app/app from running this boot" || \
+  echo "Could not find rc.local script running, likely /app/app is already started"

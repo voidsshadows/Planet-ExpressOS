@@ -8,6 +8,9 @@ if [ $UID -ne 0 ]; then
   exit 1
 fi
 
+# Source the ./patch_config config settings!
+. $(dirname $0)/patch_config
+
 echo Go into the squashfs-root dir for the rest of the steps!
 cd ./unpacked/squashfs-root
 
@@ -51,34 +54,18 @@ cat ../../RESOURCES/OpenCentauri/opencentauri-logo-small.png > ./app/www/assets/
 sed -re 's|(logo-img\[.+\])\{width:160px\}|\1{width:300px}|' -i ./app/www/*.js
 
 echo Add OpenCentauri initialization to /etc/rc.local
-sed -r -e '$ d' -i ./etc/rc.local
-cat << EOF >> ./etc/rc.local
-# BEGIN: INITIALIZE OpenCentauri and entware
-mkdir -p /user-resource/OpenCentauri/entware \\
-         /user-resource/OpenCentauri/root \\
-         /opt /root
-mount -o bind /user-resource/OpenCentauri/entware /opt
-mount -o bind /user-resource/OpenCentauri/root /root
-# Bootstrap entware and the root homedir if needed!
-if [ ! -f /opt/etc/entware_release ]; then
-  cd /user-resource &&
-    tar zxvf /app/OpenCentauri-bootstrap.tar.gz
-fi
-# Once entware is properly installed, do the things!
-if [ -f /opt/etc/entware_release ]; then
-  # Update mlocate db now, and every 24 hours!
-  sh -c "while [ 1 ]; do /opt/bin/updatedb; sleep 86400; done" &
+# Just copy in the modified /etc/rc.local, need to make this better...
+cat ../../RESOURCES/OpenCentauri/rc.local > ./etc/rc.local
+# Do edits to this file from ./patch_config
+sed -re "s|%OC_APP_BOOT_DELAY%|$OC_APP_BOOT_DELAY|g" -i ./etc/rc.local
 
-  # Generate openssh host keys in /opt/etc/ssh (if needed, else it skips)
-  /opt/bin/ssh-keygen -A
+# Install oc-startwifi.sh script to /app:
+cat ../../RESOURCES/OpenCentauri/oc-startwifi.sh > ./app/oc-startwifi.sh
+chmod 755 ./app/oc-startwifi.sh
 
-  # Start entware system services, includes openssh
-  /opt/etc/init.d/rc.unslung start
-fi
-# END: INITIALIZE OpenCentauri and entware
-
-exit 0
-EOF
+# Install 'noapp' script in /usr/sbin
+cat ../../RESOURCES/OpenCentauri/noapp > ./usr/sbin/noapp
+chmod 755 ./usr/sbin/noapp
 
 # TODO: Fix swupdate_cmd.sh -i /mnt/exUDISK/update/update.swu -e stable,now_A_next_B -k /etc/swupdate_public.pem
 # Write log to /mnt/exUDISK/ instead of /mnt/UDISK

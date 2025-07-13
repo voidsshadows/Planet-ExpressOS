@@ -1,0 +1,9 @@
+###
+### This is the configuration for OpenCentauri Firmware
+###
+### You can edit variables in here to tweak settings in the FW!
+###
+
+# How long to wait until starting /app/app on boot
+# If non-zero, you can SSH in after boot and run 'noapp' to prevent start
+OC_APP_BOOT_DELAY=0

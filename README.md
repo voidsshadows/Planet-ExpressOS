@@ -62,8 +62,22 @@ If there are two versions of a script, and one has an -ac in the name, this is t
 
 ## Download the Base Firmware
 
-1. Download the 1.1.25 FW to FW/:
+1. Download the 1.1.25 FW to `./FW/`:
     `./fwdl.sh`
+
+## Configure the OpenCentauri Firmware Image
+
+### Config Instructions
+
+1. Edit the file `./patch_config` with any settings you would like to override
+
+### Documentation of Settings
+
+```sh
+# How long to wait until starting /app/app on boot
+# If non-zero, you can SSH in after boot and run 'noapp' to prevent start
+OC_APP_BOOT_DELAY=0
+```
 
 ## Build the OpenCentauri Firmware Image
 
