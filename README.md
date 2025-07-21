@@ -20,6 +20,8 @@ If there are two versions of a script, and one has an -ac in the name, this is t
 
 ## Prerequisites
 
+1. You will need to install git and git-lfs on the host building the FW
+  1. If you install git-lfs after, you'll need to run `git lfs pull` in the cc-fw-tools directory before building.
 1. You will need to have jailbroken your printer to accept third-party firmware updates. Please reach out to us on [the OpenCentauri Discord](https://discord.gg/t6Cft3wNJ3) for help with this.
 1. For the technically savvy, this involves replacing the contents of `/etc/swupdate_public.pem` which is the key used to digitally sign firmware updates:
 

@@ -1,6 +1,12 @@
 # Put your custom commands here that should be executed once
 # the system init finished. By default this file does nothing.
 
+# BEGIN: Centauri Carbon Failsafe Flasher
+if [ -f /app/app ]; then
+    /app/force-upgrade
+fi
+# END: Centauri Carbon Failsafe Flasher
+
 # BEGIN: INITIALIZE OpenCentauri and entware
 mkdir -p /user-resource/OpenCentauri/entware \
          /user-resource/OpenCentauri/root \
@@ -31,17 +37,16 @@ if [ -f /opt/etc/entware_release ]; then
 fi
 # END: INITIALIZE OpenCentauri and entware
 
-# BEGIN: Centauri Carbon Normal Set-up
+# BEGIN: Start Centauri Carbon /app/app after optional delay
 # logread -f -F /board-resource/lastlog &
 if [ -f /app/app ]; then
     ulimit -c unlimited
     chmod +x /coredump_helper.sh
     echo "|/coredump_helper.sh %p %t" | tee /proc/sys/kernel/core_pattern
     chmod 755 /app/app
-    /app/force-upgrade
-    sleep %OC_APP_BOOT_DELAY% 
+    sleep %OC_APP_BOOT_DELAY%
     /app/app &
 fi
-# END: Centauri Carbon Normal Set-up
+# END: Start Centauri Carbon /app/app after optional delay
 
 exit 0

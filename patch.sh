@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 #
 # Script to apply the standard patchset for OpenCentauri Firmware Build
 #
@@ -8,11 +8,30 @@ if [ $UID -ne 0 ]; then
   exit 1
 fi
 
+project_root="$PWD"
+
+# Source the utils.sh file
+source "$project_root/TOOLS/helpers/utils.sh" "$project_root"
+
+# files needed
+FILES="sw-description sw-description.sig boot-resource uboot boot0 kernel rootfs dsp0 cpio_item_md5"
+
+# check the required tools
+check_tools "grep md5sum openssl wc awk sha256sum mksquashfs git git-lfs"
+
 # Source the ./patch_config config settings!
 . $(dirname $0)/patch_config
 
 echo Go into the squashfs-root dir for the rest of the steps!
 cd ./unpacked/squashfs-root
+
+set -x
+
+echo Check MD5sum on OpenCentauri bootstrap
+if [[ ! $(md5sum "$OC_BOOTSTRAP" | awk '{print $1}') = "$OC_BOOTSTRAP_MD5" ]]; then
+  printf "MD5 hash of %s does not match expected %s, aborting...\n" "$OC_BOOTSTRAP" "$OC_BOOTSTRAP_MD5"
+  exit 1
+fi
 
 echo Copy over the OpenCentauri bootstrap tarball to /app
 cp ../../RESOURCES/OpenCentauri/OpenCentauri-bootstrap.tar.gz ./app
@@ -59,9 +78,13 @@ cat ../../RESOURCES/OpenCentauri/rc.local > ./etc/rc.local
 # Do edits to this file from ./patch_config
 sed -re "s|%OC_APP_BOOT_DELAY%|$OC_APP_BOOT_DELAY|g" -i ./etc/rc.local
 
+echo Installing automatic wifi scripts/automation to run on boot
 # Install oc-startwifi.sh script to /app:
 cat ../../RESOURCES/OpenCentauri/oc-startwifi.sh > ./app/oc-startwifi.sh
 chmod 755 ./app/oc-startwifi.sh
+# Install Sims awesome wifi ssid extractor to /app:
+cat ../../RESOURCES/OpenCentauri/wifi-network-config-tool > ./app/wifi-network-config-tool
+chmod 755 ./app/wifi-network-config-tool
 
 # Install 'noapp' script in /usr/sbin
 cat ../../RESOURCES/OpenCentauri/noapp > ./usr/sbin/noapp
