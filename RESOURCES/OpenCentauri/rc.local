@@ -20,11 +20,17 @@ if [ ! -f /opt/etc/entware_release ]; then
 fi
 # Once entware is properly installed, do the things!
 if [ -f /opt/etc/entware_release ]; then
+  # Add entware to path for rest of rc.local execution
+  export PATH="/opt/sbin:/opt/bin:$PATH"
+
+  # Mount the USB FAT/exFAT drive if available or if it becomes available
+  mount_usb_daemon &
+
   # Update mlocate db now, and every 24 hours!
-  sh -c "while [ 1 ]; do /opt/bin/updatedb; sleep 86400; done" &
+  sh -c "while [ 1 ]; do updatedb; sleep 86400; done" &
 
   # Generate openssh host keys in /opt/etc/ssh (if needed, else it skips)
-  /opt/bin/ssh-keygen -A
+  ssh-keygen -A
 
   # Start entware system services, includes openssh
   /opt/etc/init.d/rc.unslung start

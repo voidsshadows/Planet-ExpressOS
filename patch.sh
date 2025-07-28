@@ -89,6 +89,12 @@ chmod 755 ./app/wifi-network-config-tool
 # Install 'noapp' script in /usr/sbin
 cat ../../RESOURCES/OpenCentauri/noapp > ./usr/sbin/noapp
 chmod 755 ./usr/sbin/noapp
+# Install 'mount_usb' script in /usr/sbin
+cat ../../RESOURCES/OpenCentauri/mount_usb > ./usr/sbin/mount_usb
+chmod 755 ./usr/sbin/mount_usb
+# Install 'mount_usb_daemon' script in /usr/sbin
+cat ../../RESOURCES/OpenCentauri/mount_usb_daemon > ./usr/sbin/mount_usb_daemon
+chmod 755 ./usr/sbin/mount_usb_daemon
 
 # TODO: Fix swupdate_cmd.sh -i /mnt/exUDISK/update/update.swu -e stable,now_A_next_B -k /etc/swupdate_public.pem
 # Write log to /mnt/exUDISK/ instead of /mnt/UDISK

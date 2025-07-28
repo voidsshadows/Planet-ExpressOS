@@ -1,0 +1,22 @@
+#!/opt/bin/bash
+
+DEST="/mnt/exUDISK"
+
+ismounted() {
+  mount | grep $DEST &>/dev/null && return 0
+  return 1
+}
+
+while [ 0 ]; do
+  DISK="$(ls /dev/sd[a-z] | xargs -i fdisk -l {} | grep -i fat | awk '{print $1}' | head -1)"
+  if [[ ! -z "$DISK" ]] && ! ismounted; then
+    echo Try and mount the USB
+    mount -t vfat,exfat -o iocharset=utf8 $DISK $DEST && \
+      echo "Successfully mounted $DEST" || \
+      echo "Could not find valid FAT or exFAT USB stick, not mounted"
+  else
+    echo "No USB stick found or already mounted"
+  fi
+  echo Looping...
+  sleep 5
+done
