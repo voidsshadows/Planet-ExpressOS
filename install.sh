@@ -30,8 +30,8 @@ ip="$2"
 # SCP file transfer
 if [ $stage -eq 1 ]; then
     # Only do this step for stage and sendit
-    echo "Mapping old UDISK to exUDISK..."
-    ssh -p $port $username@$ip 'mount --bind /mnt/exUDISK /mnt/UDISK'
+    echo "Mounting exUDISK if necessary and mapping old UDISK to exUDISK..."
+    ssh -p $port $username@$ip 'mount -t vfat,exfat -o iocharset=utf8 /dev/sda1 /mnt/exUDISK ; mount --bind /mnt/exUDISK /mnt/UDISK'
     echo "Uploading..."
     scp -o StrictHostKeyChecking=no -P $port update/update.swu $username@$ip:/mnt/exUDISK
 fi

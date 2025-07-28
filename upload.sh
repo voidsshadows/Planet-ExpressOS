@@ -1,1 +1,1 @@
-TOOLS/custom_install.sh
+install.sh
