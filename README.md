@@ -100,9 +100,13 @@ OC_APP_BOOT_DELAY=0
 ## Install to Printer
 
 1. Install to the printer (only works if already running OpenCentauri FW to install an update):
-    1. `./upload.sh [--stage,--flash,--sendit] <printer-ip-or-hostname>`
+    1. `./install.sh [--stage,--flash,--sendit] <printer-ip-or-hostname>`
     1. Stages, flashes or stages and flashes the file generated in update/update.sw by `pack.sh`.
     1. Run with no arguments for usage.
 1. Alternative (if just jailbroken but not running OpenCentauri yet):
     1. Copy update/update.swu to USB stick, in the folder update, file update.swu
     1. Reboot the printer and it should detect an update is available!
+
+## Special Commands on Printer
+1. `mount_usb`: Mounts the USB drive if available to /mnt/exUDISK like /app/app does
+1. `noapp`: Run after logging in if you configured an OC_APP_BOOT_DELAY to prevent app from starting this boot
