@@ -77,6 +77,7 @@ echo Add OpenCentauri initialization to /etc/rc.local
 cat ../../RESOURCES/OpenCentauri/rc.local > ./etc/rc.local
 # Do edits to this file from ./patch_config
 sed -re "s|%OC_APP_BOOT_DELAY%|$OC_APP_BOOT_DELAY|g" -i ./etc/rc.local
+sed -re "s|%OC_APP_GADGET%|$OC_APP_GADGET|g" -i ./etc/rc.local
 
 echo Installing automatic wifi scripts/automation to run on boot
 # Install oc-startwifi.sh script to /app:
