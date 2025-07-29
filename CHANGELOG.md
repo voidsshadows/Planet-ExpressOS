@@ -2,9 +2,9 @@
 
 All notable updates to OpenCentauri FW build and defaults will be documented in this file.
 
-## [0.0.3] - 2025-07-28
+## [0.0.3] - 2025-07-29
 **GitHub Release:** [`v0.0.3`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.3)  
-**Commit Hash:** [`9b0af872`](https://github.com/OpenCentauri/cc-fw-tools/commit/9b0af872)
+**Commit Hash:** [`b598c291`](https://github.com/OpenCentauri/cc-fw-tools/commit/b598c291)
 
 - Updated OpenCentauri firmware build and deploy process with a few additions:
   - Now mounts usb on boot-up (or if you plug in USB after boot!) without needing /app/app running.
@@ -16,7 +16,9 @@ All notable updates to OpenCentauri FW build and defaults will be documented in 
 ## [0.0.2] 
 **GitHub Release:** [`v0.0.1`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.2)
 **Commit Hash:** [`bd9bc14f`](https://github.com/OpenCentauri/cc-fw-tools/commit/bd9bc14f)
-
+### Stuff
+  - Stuff
+  - Fill me in
 
 ## [0.0.1] 
 **GitHub Release:** [`v0.0.1`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.1)  
