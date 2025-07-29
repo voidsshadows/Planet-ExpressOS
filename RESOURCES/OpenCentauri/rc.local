@@ -43,6 +43,8 @@ if [ -f /opt/etc/entware_release ]; then
 fi
 # END: INITIALIZE OpenCentauri and entware
 
+# Handle OpenCentauri boot delay + detection of gadget mode Pi
+sleep %OC_APP_BOOT_DELAY%
 if [ -e %OC_APP_GADGET% ]; then
   # Gadget Mode pi present! Continuing boot without /app/app...
   exit 0
@@ -55,7 +57,6 @@ if [ -f /app/app ]; then
     chmod +x /coredump_helper.sh
     echo "|/coredump_helper.sh %p %t" | tee /proc/sys/kernel/core_pattern
     chmod 755 /app/app
-    sleep %OC_APP_BOOT_DELAY%
     /app/app &
 fi
 # END: Start Centauri Carbon /app/app after optional delay
