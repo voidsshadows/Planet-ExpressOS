@@ -2,9 +2,16 @@
 
 All notable updates to OpenCentauri FW build and defaults will be documented in this file.
 
+## [0.0.4] - 2025-08-24
+**GitHub Release:** [`v0.0.4`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.4)  
+
+- Updated OpenCentauri firmware build and deploy process with a few additions:
+  - Enable uboot console output on serial UART (3.3v)
+  - Enable rootshell on serial UART (press enter after boot-up
+  - Change SWU process from `./install.sh` to just use `/mnt/UDISK` (so no real USB stick involved anymore)
+
 ## [0.0.3] - 2025-07-29
 **GitHub Release:** [`v0.0.3`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.3)  
-**Commit Hash:** [`b598c291`](https://github.com/OpenCentauri/cc-fw-tools/commit/b598c291)
 
 - Updated OpenCentauri firmware build and deploy process with a few additions:
   - Now mounts usb on boot-up (or if you plug in USB after boot!) without needing /app/app running.
@@ -15,14 +22,12 @@ All notable updates to OpenCentauri FW build and defaults will be documented in 
 
 ## [0.0.2] 
 **GitHub Release:** [`v0.0.1`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.2)
-**Commit Hash:** [`bd9bc14f`](https://github.com/OpenCentauri/cc-fw-tools/commit/bd9bc14f)
 ### Stuff
   - Stuff
   - Fill me in
 
 ## [0.0.1] 
 **GitHub Release:** [`v0.0.1`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.1)  
-**Commit Hash:** [`bd9bc14f`](https://github.com/OpenCentauri/cc-fw-tools/commit/bd9bc14f)
 - Initial release
 ### Onboard Mods:
   - Patch in a new OpenCentauri graphic for the web UI

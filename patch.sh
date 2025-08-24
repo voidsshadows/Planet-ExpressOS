@@ -22,6 +22,9 @@ check_tools "grep md5sum openssl wc awk sha256sum mksquashfs git git-lfs"
 # Source the ./patch_config config settings!
 . $(dirname $0)/patch_config
 
+# Legacy AnyCubic option: Configure centauri carbon for serial UART and uboot shell
+OPTIONS_DIR="./RESOURCES/OPTIONS" ./RESOURCES/OPTIONS/uart/uart.sh . 2.3.9
+
 echo Go into the squashfs-root dir for the rest of the steps!
 cd ./unpacked/squashfs-root
 
