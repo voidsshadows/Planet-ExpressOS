@@ -9,12 +9,14 @@ project_root="$PWD"
 source "$project_root/TOOLS/helpers/utils.sh" "$project_root"
 
 # --- Firmware Selection ---
-DEFAULT_FW="FW/FW-CentauriCarbon-v1.1.25-2025-05-09.bin"
+#DEFAULT_FW="FW/FW-CentauriCarbon-v1.1.25-2025-05-09.bin"
+#DEFAULT_FW="FW-CentauriCarbon-v1.1.40-2025-08-15.bin"
+[[ -z "$1" ]] && VERSION="1.1.40" || VERSION="$1"
 FIRMWARE_FILE=""
 
-if [ -n "$1" ]; then
+if [ -n "$VERSION" ]; then
     # Argument provided, try to find a matching firmware file
-    VERSION=$1
+    #VERSION=$1
     # Use a loop to safely handle the glob pattern and find the first match
     for f in FW/FW-CentauriCarbon-v${VERSION}-*.bin; do
         if [ -e "$f" ]; then

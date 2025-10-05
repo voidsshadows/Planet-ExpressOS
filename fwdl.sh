@@ -10,12 +10,15 @@ declare -A versions
 versions["1.1.18"]="https://download.chitubox.com/chitusystems/chitusystems/public/printer/firmware/release/1/ca8e1d9a20974a5896f8f744e780a8a7/1/1.1.18/2025-03-31/74406d43dc314af7a174dba70487ac2b.bin"
 versions["1.1.25"]="https://download.chitubox.com/chitusystems/chitusystems/public/printer/firmware/release/1/ca8e1d9a20974a5896f8f744e780a8a7/1/1.1.25/2025-05-09/219b4c9e67de4a1d99c7680164911ab5.bin"
 versions["1.1.29"]="https://download.chitubox.com/chitusystems/chitusystems/public/printer/firmware/release/1/ca8e1d9a20974a5896f8f744e780a8a7/1/1.1.29/2025-06-18/810e5a7e9518452c9172e11a7d04a683.bin"
+# Thanks Anna!
+versions["1.1.40"]="https://s3.devminer.xyz/archive/ELEGOO_Centauri_Update_1.1.40.bin"
 versions["1.1.42"]="https://download.chitubox.com/chitusystems/chitusystems/public/printer/firmware/release/1/ca8e1d9a20974a5896f8f744e780a8a7/1/1.1.42/2025-09-18/5de8bf345f044452a815dcf91241ddc0.bin"
 
 declare -A dates
 dates["1.1.18"]="2025-03-31"
 dates["1.1.25"]="2025-05-09"
 dates["1.1.29"]="2025-06-18"
+dates["1.1.40"]="2025-08-15"
 dates["1.1.42"]="2025-09-18"
 
 # --- Function to select version ---
