@@ -2,12 +2,19 @@
 
 All notable updates to OpenCentauri FW build and defaults will be documented in this file.
 
+## [0.0.5] - 2025-10-XX TBD
+**GitHub Release:** [`v0.0.5`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.5)  
+
+- TBD running changelog for 0.0.5, plan is to try and rebase on 1.1.40 or 1.1.42
+- Updated OpenCentauri firmware build and deploy process with a few additions:
+  - `fwdl.sh` and `build.sh` now support an optional version argument to specify which firmware version to download and build. Defaults to 1.1.25.
+
 ## [0.0.4] - 2025-08-24
 **GitHub Release:** [`v0.0.4`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.4)  
 
 - Updated OpenCentauri firmware build and deploy process with a few additions:
   - Enable uboot console output on serial UART (3.3v)
-  - Enable rootshell on serial UART (press enter after boot-up
+  - Enable rootshell on serial UART (press enter after boot-up)
   - Change SWU process from `./install.sh` to just use `/mnt/UDISK` (so no real USB stick involved anymore)
 
 ## [0.0.3] - 2025-07-29

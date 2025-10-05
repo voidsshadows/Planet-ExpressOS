@@ -64,8 +64,8 @@ If there are two versions of a script, and one has an -ac in the name, this is t
 
 ## Download the Base Firmware
 
-1. Download the 1.1.25 FW to `./FW/`:
-    `./fwdl.sh`
+1. Download the base FW to `./FW/` (defaults to 1.1.25):
+    `./fwdl.sh [version]`
 
 ## Configure the OpenCentauri Firmware Image
 
@@ -94,8 +94,8 @@ OC_APP_BOOT_DELAY=0
 
 ### Option 2: Automatic Build
 
-1. Run through all the steps in Option 1:
-    `./build.sh`
+1. Run through all the steps in Option 1, optionally specifying the firmware version to use (defaults to 1.1.25):
+    `./build.sh [version]`
 
 ## Install to Printer
 
