@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+env:
+  FW_VER=1.1.25
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,11 +21,11 @@ jobs:
       
       - name: Download firmware
         run: |
-          ./fwdl.sh
+          ./fwdl.sh $FW_VER
 
-      - name: Patch firmware
+      - name: Patch and build firmware
         run: |
-          ./build.sh
+          ./build.sh $FW_VER
       
       - uses: actions/upload-artifact@v4
         with:
