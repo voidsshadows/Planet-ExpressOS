@@ -82,6 +82,11 @@ cat ../../RESOURCES/OpenCentauri/rc.local > ./etc/rc.local
 sed -re "s|%OC_APP_BOOT_DELAY%|$OC_APP_BOOT_DELAY|g" -i ./etc/rc.local
 sed -re "s|%OC_APP_GADGET%|$OC_APP_GADGET|g" -i ./etc/rc.local
 
+echo 'Add symlink for /lib/modules/ for the 1.1.40 FW w/ new kernel ver 5.4.61-ab1175 (harmless for earlier revs)'
+cd ./lib/modules
+ln -sf 5.4.61 5.4.61-ab1175
+cd -
+
 echo Installing automatic wifi scripts/automation to run on boot
 # Install oc-startwifi.sh script to /app:
 cat ../../RESOURCES/OpenCentauri/oc-startwifi.sh > ./app/oc-startwifi.sh

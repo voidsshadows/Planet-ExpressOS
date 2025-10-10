@@ -7,7 +7,7 @@ All notable updates to OpenCentauri FW build and defaults will be documented in 
 
 - TBD running changelog for 0.0.5, plan is to try and rebase on 1.1.40 or 1.1.42
 - Updated OpenCentauri firmware build and deploy process with a few additions:
-  - `fwdl.sh` and `build.sh` now support an optional version argument to specify which firmware version to download and build. Defaults to 1.1.25.
+  - `fwdl.sh` and `build.sh` now support an optional version argument to specify which firmware version to download and build. Defaults to 1.1.40.
 
 ## [0.0.4] - 2025-08-24
 **GitHub Release:** [`v0.0.4`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.4)  
