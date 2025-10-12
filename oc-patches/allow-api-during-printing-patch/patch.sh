@@ -12,4 +12,6 @@ source "$project_root/TOOLS/helpers/utils.sh" "$project_root"
 check_tools "bspatch"
 
 cd "$SQUASHFS_ROOT/app"
-bspatch ./app ./app "$CURRENT_PATCH_PATH/api-control-patch.bsdiff"
+bspatch ./app ./app-patch "$CURRENT_PATCH_PATH/api-control-patch.bsdiff"
+rm ./app
+mv ./app-patch ./app
