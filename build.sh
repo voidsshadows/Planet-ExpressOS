@@ -59,7 +59,7 @@ fi
 echo
 
 echo "Patching the firmware..."
-sudo ./patch.sh
+sudo python3 ./oc-patches/patch_planner.py $VERSION
 if [ $? -ne 0 ]; then
     echo "Error patching the firmware, aborting..."
     exit 1

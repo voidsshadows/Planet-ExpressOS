@@ -1,0 +1,5 @@
+id = "before"
+name = "Before"
+execution_policy = "Always"
+before = ["*"]
+compatible_versions = ["*"]

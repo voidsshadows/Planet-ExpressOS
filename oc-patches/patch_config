@@ -4,8 +4,7 @@
 ### You can edit variables in here to tweak settings in the FW!
 ###
 
-OC_BOOTSTRAP="../../RESOURCES/OpenCentauri/OpenCentauri-bootstrap.tar.gz"
-OC_BOOTSTRAP_MD5="a0a2eb05011884f1ab281ed4980ee3a7"
+OC_BOOTSTRAP_MD5=a0a2eb05011884f1ab281ed4980ee3a7
 
 # How long to wait until starting /app/app on boot
 # If non-zero, you can SSH in after boot and run 'noapp' to prevent start
@@ -14,3 +13,6 @@ OC_APP_BOOT_DELAY=10
 # If this file exists, then auto noapp on boot
 # Designed to allow for a Raspberry Pi in gadget mode to plug in!
 OC_APP_GADGET=/dev/ttyACM0
+
+BLOCK_CONNECTIVITY_CHECK=true
+BLOCK_UPDATE_CHECK=true

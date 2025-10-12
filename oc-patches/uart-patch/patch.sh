@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+cd "$REPOSITORY_ROOT"
+OPTIONS_DIR="./RESOURCES/OPTIONS" ./RESOURCES/OPTIONS/uart/uart.sh . 2.3.9

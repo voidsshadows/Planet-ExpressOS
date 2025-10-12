@@ -1,0 +1,4 @@
+id = "block_connectivity_check"
+name = "Block connectivity check"
+compatible_versions = ["*"]
+after = ["base"]

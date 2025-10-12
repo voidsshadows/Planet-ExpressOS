@@ -1,0 +1,4 @@
+id = "block_update_check"
+name = "Block update check"
+compatible_versions = ["*"]
+after = ["base"]

@@ -1,0 +1,4 @@
+id = "uart"
+name = "Enable Uart"
+compatible_versions = ["1.1.25"]
+after = ["base"]

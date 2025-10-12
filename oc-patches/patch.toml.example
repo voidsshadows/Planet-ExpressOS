@@ -1,0 +1,23 @@
+# Used for before/requires fields and execute_policy matching the id as env var.
+id = "patch_id"
+
+# Friendly name displayed in the console
+name = "Patch name"
+
+# Execute before another patch
+before = []
+
+# Execute after another patch
+after = []
+
+# Execute after another patch + make it required
+requires = []
+
+# Sets when to execute this patch. Options: "Always", "Never", "MatchesEnv"
+execution_policy = "Always"
+
+# Command to run. Defaults to ["./patch.sh"]
+run = []
+
+# Compatible base firmware versions
+compatible_versions = []
