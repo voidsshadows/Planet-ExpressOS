@@ -9,8 +9,7 @@ set -e
 
 project_root="$REPOSITORY_ROOT"
 source "$project_root/TOOLS/helpers/utils.sh" "$project_root"
-check_tools "git"
+check_tools "patch"
 
-mv "$SQUASHFS_ROOT/app/resources/configs/printer.cfg" printer.cfg
-git apply patch.diff
-mv printer.cfg "$SQUASHFS_ROOT/app/resources/configs/printer.cfg"
+cd "$SQUASHFS_ROOT/app/resources/configs"
+patch < "$CURRENT_PATCH_PATH/patch.diff"
