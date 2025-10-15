@@ -24,7 +24,7 @@ try:
 except:
     version = "Unknown"
 
-version = version + " OC\0"
+version = version + "-oc\0"
 encoded = version.encode(encoding="ASCII")
 print(version)
 
