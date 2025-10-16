@@ -34,6 +34,14 @@ Made by [Sims](https://github.com/suchmememanyskill/)
 
 Apply with command `/bootlogos/swap.sh hackerinside`
 
+### Gradient
+
+Made by [mon5termatt](https://github.com/mon5termatt)
+
+![graident](./bootlogos/gradient.bmp)
+
+Apply with command `/bootlogos/swap.sh gradient`
+
 ### Official
 
 Made by [Elegoo](https://github.com/elegooofficial)
