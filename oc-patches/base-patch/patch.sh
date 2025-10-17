@@ -82,6 +82,7 @@ cat "$CURRENT_PATCH_PATH/rc.local" >> ./etc/rc.local
 # Do edits to this file from ./patch_config
 sed -re "s|%OC_APP_BOOT_DELAY%|$OC_APP_BOOT_DELAY|g" -i ./etc/rc.local
 sed -re "s|%OC_APP_GADGET%|$OC_APP_GADGET|g" -i ./etc/rc.local
+sed -re "s|%OC_NTP_SERVER%|$OC_NTP_SERVER|g" -i ./etc/rc.local
 
 echo 'Add symlink for /lib/modules/ for the 1.1.40 FW w/ new kernel ver 5.4.61-ab1175 (harmless for earlier revs)'
 cd ./lib/modules
@@ -95,6 +96,10 @@ chmod 755 ./app/oc-startwifi.sh
 # Install Sims awesome wifi ssid extractor to /app:
 cat "$CURRENT_PATCH_PATH/wifi-network-config-tool" > ./app/wifi-network-config-tool
 chmod 755 ./app/wifi-network-config-tool
+
+echo Installing automatic NTP date/time sync to run on boot
+cat "$CURRENT_PATCH_PATH/ntpdate" > ./app/ntpdate
+chmod 755 ./app/ntpdate
 
 # Install 'noapp' script in /usr/sbin
 cat "$CURRENT_PATCH_PATH/noapp" > ./usr/sbin/noapp
