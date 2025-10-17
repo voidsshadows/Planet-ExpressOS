@@ -1,0 +1,5 @@
+id = "setup"
+name = "Setup patching system"
+execution_policy = "Always"
+before = ["*"]
+compatible_versions = ["*"]

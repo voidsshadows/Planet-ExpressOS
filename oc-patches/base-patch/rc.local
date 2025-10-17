@@ -1,6 +1,3 @@
-# Put your custom commands here that should be executed once
-# the system init finished. By default this file does nothing.
-
 # BEGIN: Centauri Carbon Failsafe Flasher
 if [ -f /app/app ]; then
     /app/force-upgrade
@@ -29,6 +26,9 @@ if [ -f /opt/etc/entware_release ]; then
   # Update mlocate db now, and every 24 hours!
   sh -c "while [ 1 ]; do updatedb; sleep 86400; done" &
 
+  # Synchronize time to NTP, and every 24 hours!
+  sh -c "while [ 1 ]; do /app/ntpdate %OC_NTP_SERVER%; sleep 86400; done" &
+
   # Generate openssh host keys in /opt/etc/ssh (if needed, else it skips)
   ssh-keygen -A
 
@@ -49,17 +49,3 @@ if [ -e %OC_APP_GADGET% ]; then
   # Gadget Mode pi present! Continuing boot without /app/app...
   exit 0
 fi
-
-# BEGIN: Start Centauri Carbon /app/app after optional delay
-# logread -f -F /board-resource/lastlog &
-if [ -f /app/app ]; then
-    echo 3 > /proc/sys/vm/drop_caches
-    ulimit -c unlimited
-    chmod +x /coredump_helper.sh
-    echo "|/coredump_helper.sh %p %t" | tee /proc/sys/kernel/core_pattern
-    chmod 755 /app/app
-    /app/app &
-fi
-# END: Start Centauri Carbon /app/app after optional delay
-
-exit 0

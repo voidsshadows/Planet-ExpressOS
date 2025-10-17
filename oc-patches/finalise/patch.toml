@@ -1,0 +1,5 @@
+id = "finalise"
+name = "Finalise patches"
+execution_policy = "Always"
+after = ["*"]
+compatible_versions = ["*"]

@@ -1,0 +1,5 @@
+id = "set_firmware_version"
+name = "Replace firmware version with OpenCentauri version"
+compatible_versions = ["1.1.40"]
+after = ["base"]
+run = ["./patch.py"]

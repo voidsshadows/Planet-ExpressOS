@@ -1,0 +1,4 @@
+id = "base"
+name = "OpenCentauri Base"
+execution_policy = "Always"
+compatible_versions = ["*"]

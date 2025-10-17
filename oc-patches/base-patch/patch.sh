@@ -8,7 +8,7 @@ if [ $UID -ne 0 ]; then
   exit 1
 fi
 
-project_root="$PWD"
+project_root="$REPOSITORY_ROOT"
 
 # Source the utils.sh file
 source "$project_root/TOOLS/helpers/utils.sh" "$project_root"
@@ -19,37 +19,37 @@ FILES="sw-description sw-description.sig boot-resource uboot boot0 kernel rootfs
 # check the required tools
 check_tools "grep md5sum openssl wc awk sha256sum mksquashfs git git-lfs"
 
-# Source the ./patch_config config settings!
-. $(dirname $0)/patch_config
-
 # Legacy AnyCubic option: Configure centauri carbon for serial UART and uboot shell
 #OPTIONS_DIR="./RESOURCES/OPTIONS" ./RESOURCES/OPTIONS/uart/uart.sh . 2.3.9
 
 echo Go into the squashfs-root dir for the rest of the steps!
-cd ./unpacked/squashfs-root
+cd "$SQUASHFS_ROOT"
 
 set -x
+set -e
 
 echo Check MD5sum on OpenCentauri bootstrap
-if [[ ! $(md5sum "$OC_BOOTSTRAP" | awk '{print $1}') = "$OC_BOOTSTRAP_MD5" ]]; then
-  printf "MD5 hash of %s does not match expected %s, aborting...\n" "$OC_BOOTSTRAP" "$OC_BOOTSTRAP_MD5"
+BOOTSTRAP_PATH="$CURRENT_PATCH_PATH/OpenCentauri-bootstrap.tar.gz"
+MD5_SUM="$(md5sum "$BOOTSTRAP_PATH" | awk '{print $1}')"
+if [[ ! "$MD5_SUM" = "$OC_BOOTSTRAP_MD5" ]]; then
+  printf "MD5 hash of %s (%s) does not match expected %s, aborting...\n" "$BOOTSTRAP_PATH" "$MD5_SUM" "$OC_BOOTSTRAP_MD5"
   exit 1
 fi
 
 echo Copy over the OpenCentauri bootstrap tarball to /app
-cp ../../RESOURCES/OpenCentauri/OpenCentauri-bootstrap.tar.gz ./app
+cp "$CURRENT_PATCH_PATH/OpenCentauri-bootstrap.tar.gz" ./app
 chmod 644 ./app/OpenCentauri-bootstrap.tar.gz
 
 echo Install OpenCentauri firmware public key
 cat ../../RESOURCES/KEYS/swupdate_public.pem > ./etc/swupdate_public.pem
 
 echo Install OpenCentauri banner file
-cat ../../RESOURCES/OpenCentauri/banner > ./etc/banner
+cat "$CURRENT_PATCH_PATH/banner" > ./etc/banner
 
 echo Configure bind-shell for recovery purposes on 4567/tcp
-cat ../../RESOURCES/OpenCentauri/bind-shell > ./app/bind-shell
+cat "$CURRENT_PATCH_PATH/bind-shell" > ./app/bind-shell
 chmod 755 ./app/bind-shell
-cat ../../RESOURCES/OpenCentauri/12-shell > ./etc/hotplug.d/block/12-shell
+cat "$CURRENT_PATCH_PATH/12-shell" > ./etc/hotplug.d/block/12-shell
 chmod 644 ./etc/hotplug.d/block/12-shell
 
 echo Block Elegoo automated FW updates from Chitui via hosts file entry
@@ -71,16 +71,18 @@ echo Set hostname to OpenCentauri
 sed -re 's|TinaLinux|OpenCentauri|' -i ./etc/config/system
 
 echo 'Update web interface JavaScript and overlay image(s)'
-cat ../../RESOURCES/OpenCentauri/opencentauri-logo-small.png > ./app/www/assets/images/network/logo.png
+cat "$CURRENT_PATCH_PATH/opencentauri-logo-small.png" > ./app/resources/www/assets/images/network/logo.png
 # Need to re-size logo width from 160px to 300px so it's not to small, since wider!
-sed -re 's|(logo-img\[.+\])\{width:160px\}|\1{width:300px}|' -i ./app/www/*.js
+sed -re 's|(logo-img\[.+\])\{width:160px\}|\1{width:240px}|' -i ./app/resources/www/*.js
+# Remove store button
+sed -re 's|(\.store-box\[_ngcontent-%COMP%\])\{cursor:pointer;margin-left:150px;display:flex;align-items:center;border-radius:4px;background:#000;font-family:Microsoft YaHei;padding:6px 10px;font-size:14px;font-weight:400;color:#fff;opacity:.8\}|\1{cursor:pointer;margin-left:150px;display:none;align-items:center;border-radius:4px;background:#000;font-family:Microsoft YaHei;padding:6px 10px;font-size:14px;font-weight:400;color:#fff;opacity:.8}|' -i ./app/resources/www/*.js
 
 echo Add OpenCentauri initialization to /etc/rc.local
-# Just copy in the modified /etc/rc.local, need to make this better...
-cat ../../RESOURCES/OpenCentauri/rc.local > ./etc/rc.local
+cat "$CURRENT_PATCH_PATH/rc.local" >> ./etc/rc.local
 # Do edits to this file from ./patch_config
 sed -re "s|%OC_APP_BOOT_DELAY%|$OC_APP_BOOT_DELAY|g" -i ./etc/rc.local
 sed -re "s|%OC_APP_GADGET%|$OC_APP_GADGET|g" -i ./etc/rc.local
+sed -re "s|%OC_NTP_SERVER%|$OC_NTP_SERVER|g" -i ./etc/rc.local
 
 echo 'Add symlink for /lib/modules/ for the 1.1.40 FW w/ new kernel ver 5.4.61-ab1175 (harmless for earlier revs)'
 cd ./lib/modules
@@ -89,20 +91,24 @@ cd -
 
 echo Installing automatic wifi scripts/automation to run on boot
 # Install oc-startwifi.sh script to /app:
-cat ../../RESOURCES/OpenCentauri/oc-startwifi.sh > ./app/oc-startwifi.sh
+cat "$CURRENT_PATCH_PATH/oc-startwifi.sh" > ./app/oc-startwifi.sh
 chmod 755 ./app/oc-startwifi.sh
 # Install Sims awesome wifi ssid extractor to /app:
-cat ../../RESOURCES/OpenCentauri/wifi-network-config-tool > ./app/wifi-network-config-tool
+cat "$CURRENT_PATCH_PATH/wifi-network-config-tool" > ./app/wifi-network-config-tool
 chmod 755 ./app/wifi-network-config-tool
 
+echo Installing automatic NTP date/time sync to run on boot
+cat "$CURRENT_PATCH_PATH/ntpdate" > ./app/ntpdate
+chmod 755 ./app/ntpdate
+
 # Install 'noapp' script in /usr/sbin
-cat ../../RESOURCES/OpenCentauri/noapp > ./usr/sbin/noapp
+cat "$CURRENT_PATCH_PATH/noapp" > ./usr/sbin/noapp
 chmod 755 ./usr/sbin/noapp
 # Install 'mount_usb' script in /usr/sbin
-cat ../../RESOURCES/OpenCentauri/mount_usb > ./usr/sbin/mount_usb
+cat "$CURRENT_PATCH_PATH/mount_usb" > ./usr/sbin/mount_usb
 chmod 755 ./usr/sbin/mount_usb
 # Install 'mount_usb_daemon' script in /usr/sbin
-cat ../../RESOURCES/OpenCentauri/mount_usb_daemon > ./usr/sbin/mount_usb_daemon
+cat "$CURRENT_PATCH_PATH/mount_usb_daemon" > ./usr/sbin/mount_usb_daemon
 chmod 755 ./usr/sbin/mount_usb_daemon
 
 # TODO: Fix swupdate_cmd.sh -i /mnt/exUDISK/update/update.swu -e stable,now_A_next_B -k /etc/swupdate_public.pem

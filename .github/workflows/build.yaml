@@ -17,7 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           lfs: true
+
+      - name: Install dependencies
+        run: |
+          sudo apt install -y bsdiff
       
       - name: Download firmware
         run: |

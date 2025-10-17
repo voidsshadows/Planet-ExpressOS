@@ -2,14 +2,31 @@
 
 All notable updates to OpenCentauri FW build and defaults will be documented in this file.
 
-## [0.0.5] - 2025-10-XX TBD
+## [v0.1.0] - 2025-10-15 New patching system
+**GitHub Release:** [`v0.1.0`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.1.0)  
+
+- Fix OC-firmware for 1.1.40
+- Added new patching system (can plan patches around before/after other patches + can constrain to a version).
+- New patch: Replace bootlogo, both from the patching system and while running the system (currently has 5 bootlogos available)
+- New patch: Set homing position to front right (1.1.40 specific)
+- New patch: Disable automatically re-enabling the exhaust fan based on filament type (1.1.40 specific)
+- New patch: Block Elegoo updates
+- New patch: Block connectivity checks
+- New patch: Allow API access during printing (1.1.40 specific)
+- New patch: Add chamber light gcode commands (1.1.40 specific)
+
+Release is based off the 1.1.40 firmware image from Elegoo.
+
+**Full Changelog**: https://github.com/OpenCentauri/cc-fw-tools/compare/v0.0.4...v0.1.0
+
+## [v0.0.5] - 2025-10-XX TBD
 **GitHub Release:** [`v0.0.5`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.5)  
 
-- TBD running changelog for 0.0.5, plan is to try and rebase on 1.1.40 or 1.1.42
+- Running changelog for 0.0.5, plan is to try and rebase on 1.1.40 or 1.1.42
 - Updated OpenCentauri firmware build and deploy process with a few additions:
   - `fwdl.sh` and `build.sh` now support an optional version argument to specify which firmware version to download and build. Defaults to 1.1.40.
 
-## [0.0.4] - 2025-08-24
+## [v0.0.4] - 2025-08-24
 **GitHub Release:** [`v0.0.4`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.4)  
 
 - Updated OpenCentauri firmware build and deploy process with a few additions:
@@ -17,7 +34,7 @@ All notable updates to OpenCentauri FW build and defaults will be documented in 
   - Enable rootshell on serial UART (press enter after boot-up)
   - Change SWU process from `./install.sh` to just use `/mnt/UDISK` (so no real USB stick involved anymore)
 
-## [0.0.3] - 2025-07-29
+## [v0.0.3] - 2025-07-29
 **GitHub Release:** [`v0.0.3`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.3)  
 
 - Updated OpenCentauri firmware build and deploy process with a few additions:
@@ -27,13 +44,13 @@ All notable updates to OpenCentauri FW build and defaults will be documented in 
   - Note: You do need a USB drive plugged in to update the FW with ./install.sh
 - Added default 10s delay for /app/app boot, and auto halt boot of app if a Pi in gadget mode is detected!
 
-## [0.0.2] 
+## [v0.0.2] 
 **GitHub Release:** [`v0.0.1`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.2)
 ### Stuff
   - Stuff
   - Fill me in
 
-## [0.0.1] 
+## [v0.0.1] 
 **GitHub Release:** [`v0.0.1`](https://github.com/OpenCentauri/cc-fw-tools/releases/tag/v0.0.1)  
 - Initial release
 ### Onboard Mods:
