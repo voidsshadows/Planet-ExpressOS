@@ -1,0 +1,6 @@
+id = "random_bootlogo_swapper"
+name = "Random Bootlogo Swapper"
+compatible_versions = ["*"]
+after = []
+execution_policy = "Always"
+run = ["./patch.sh"]
