@@ -2,6 +2,8 @@
 
 # This script is run by the firmware patcher, which is already root.
 
+
+sleep 30
 # Base directory containing the theme subfolders
 BOOTLOGO_DIR="/bootlogos"
 BOOTIMG="/boot-resource"
