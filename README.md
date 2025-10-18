@@ -1,112 +1,56 @@
-# OpenCentauri Firmware Tools
+# Pizza Express OS – Everything OpenCentauri Does… Plus Blackjack & Hookers 🍕🃏💃
+
+## Why This Exists
+
+OpenCentauri (OC) is solid: bug fixes, remote access, stability, and quality-of-life improvements for the Elegoo Centauri Carbon.  
+
+**Pizza Express OS** takes all of that **and cranks it to 11**. Every OC feature, every fix, every QoL tweak is here—plus blackjack, hookers, chaos, and the occasional slice of pepperoni.  
+
+In short:  
+- **OC** = “Let’s make firmware stable and responsible.”  
+- **Pizza Express OS** = “Everything OC does… but cooler, funnier, and slightly dangerous.”  
+
+---
+
+## Core Comparison
+
+| Feature | OpenCentauri | Pizza Express OS |
+|---------|-------------|----------------|
+| Bug Fixes | ✅ | ✅ |
+| Remote Access | ✅ | ✅ + extras for chaos |
+| Default Root Password | OpenCentauri | `PizzaExpress` (change if you care) |
+| Root Shell Port | 4567 (Sims) | ✅ + full breakglass fun |
+| Branding/Flair | Minimal | Pizza-themed chaos |
+| Scripts | Stable | Stable + rewritten/tweaked for fun |
+| Risk of Chaos | Low | Medium–High (may summon pizza or small black hole) |
+| Blackjack & Hookers | ❌ | ✅ |
+
+Everything that works in OC works here—**nothing removed, everything enhanced**.  
+
+---
 
 ## Background
 
-This repo was forked from the wonderful AnyCubic Kobra Firmware tools by ultimateshadsform. Props to them for all the amazing work they put into this!
+This repo is a fork of work originally started by **ultimateshadsform** on the AnyCubic Kobra Firmware tools, passed down through **PDSComp**, **Sims**, and a few others. Big shoutout to them for building the foundation… but let’s be honest, they were just trying to fix bugs.  
 
-Scripts have been modified, re-written, tweaked etc. to support similar firmware tasks for the Elegoo Centauri Carbon printer and firmware.
+I forked it because I wanted blackjack, hookers, chaos, and maybe a slice of pepperoni.  
 
-Please note that if a script is not specifically called-out in this README, it probably hasn't been tested with the Carbon firmware and might break something or brick your printer!
+Scripts have been modified, rewritten, tweaked, or sacrificed to support Carbon-specific firmware tasks. If a script isn’t specifically called out here, consider it a gamble: it might work, it might brick your printer, it might order you a pizza.  
 
-If there are two versions of a script, and one has an -ac in the name, this is the original AnyCubic version of the file for reference.
+If there are two versions of a script, the one with `-ac` in the name is the oldest AnyCubic version—kept for nostalgia, regret, or pure schadenfreude.  
 
-## OpenCentauri Features
+---
 
-1. TBD, but for now check out ./patch.sh at the top level of this repo!
-1. Bundled entware with openssh, refreshed branding, lots of quality of life updates for remote access to printer.
-1. Default root password is 'OpenCentauri', although you can ssh-copy-id a key over! You should change this.
-1. By default root shell fromn Sims on port 4567 is available in OpenCentauri for breakglass access, can use with `nc <my-printer-ip-or-host> 4567`.
-1. More to come!!!
+## Pizza Express OS Features (All of OC + More)
+
+- All OC features included: bug fixes, remote access, entware, SSH, root shell, QoL updates.  
+- Chaos mode: scripts rewritten for fun and flexibility.  
+- Branding upgrades: pizza flair and “we don’t care” messaging baked in.  
+- Breakglass access: root shell port 4567 is ready for whatever you want to do.  
+- Default root password: now `OpenCentauri`. Change it if you like a little control.  
+- Optional surprises: small Easter eggs, humor, and chaos baked into scripts.  
+- Blackjack & hookers: because some things can’t be explained… only enjoyed.  
+
+---
 
 ## Prerequisites
-
-1. You will need to install git and git-lfs on the host building the FW
-  1. If you install git-lfs after, you'll need to run `git lfs pull` in the cc-fw-tools directory before building.
-1. You will need to have jailbroken your printer to accept third-party firmware updates. Please reach out to us on [the OpenCentauri Discord](https://discord.gg/t6Cft3wNJ3) for help with this.
-1. For the technically savvy, this involves replacing the contents of `/etc/swupdate_public.pem` which is the key used to digitally sign firmware updates:
-
-    1. Stock ELEGOO firmware signing key:
-
-        ```pem
-        -----BEGIN PUBLIC KEY-----
-        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnFBZ/+BuRCESalxGqlEE
-        he3eRigUHAZZdW1nPEQZT/6V1gARirJMzT+KUFKqMgtaQuZTtizB3Uo+PbXXwkEl
-        MaGUwRYHOY5ebTt+DfBBWEXvvklKIoKypWF6ta6B37PyHJz4ssnCcCtQRroOllXm
-        vrYLjt5tinKJUx3XoO6iLYf2R5r6+8FB3J/i1ZhJuwCBDtIsivyxdQSHsH9pX55V
-        MOsWKKyuOVyixL42hwiMxOL8HkmumLVDLeXsl0gp34JRN9tR80H5W5+8TUUXnKst
-        vjf+YfzbKCIvvLl3qjDDZW9AlwrWE1mhfxFA/N2qjDQ2rsoquLPiLm3CDVBlKCUP
-        fwIDAQAB
-        -----END PUBLIC KEY-----
-        ```
-
-    1. OpenCentauri `/etc/swupdate_public.pem` signing key:
-
-        ```pem
-        -----BEGIN PUBLIC KEY-----
-        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvkLL7VK9svGKBM4Q39uB
-        ZNkkxy6zqQeCInOE3PeIhvRa3teowz7MLiYJi+CI/4q6mPysLCo3lfY+cWFCc+U3
-        2lhhHJZy2+gEoTt0ecEWKIznd1GNaUMJFzHIHPCc4LssZFQ9ahZPPuoU/wYtguxA
-        qPSWsH+SNe8xihy5WRG4363FdvwBQc+Q7DTE7firafCzjfaPuoSClDQsyTcGByxs
-        78s23DXbvQ8jLLlVffLMFD4y9KNbuEdyswe9QEUQar+XEwFm7EkVTX+TAHzHn40s
-        hW+mpfZZgMxJ6a88A527e7DfBlAnt1ZSIh4xXZMlniv40kdXyqSWO/wqJcbmnUTn
-        cQIDAQAB
-        -----END PUBLIC KEY-----
-        ```
-
-## Reverting back to Stock ELEGOO Firmware
-
-1. To revert back, you will need to replace your original key and then flash an official ELEGOO firmware. I recommend 1.1.25 for now since it has the most features, and this is what OpenCentauri is (currently) based on.
-    1. Update the /etc/swupdate_public.pem key in your /etc directory via ssh to the original ELEGOO firmware signing key (above)
-    1. Run the script `./fwdl.sh`, to grab the 1.1.25 Firmware into the FW/ directory
-    1. Copying the new file `FW/FW-CentauriCarbon-v1.1.25-2025-05-09.bin` to your printer's USB stick at the root level, with filename `update.bin`
-    1. Insert USB-stick into printer
-    1. Re-boot your printer, and it should offer to update!
-
-## Download the Base Firmware
-
-1. Download the base FW to `./FW/` (defaults to 1.1.25):
-    `./fwdl.sh [version]`
-
-## Configure the OpenCentauri Firmware Image
-
-### Config Instructions
-
-1. Edit the file `./patch_config` with any settings you would like to override
-
-### Documentation of Settings
-
-```sh
-# How long to wait until starting /app/app on boot
-# If non-zero, you can SSH in after boot and run 'noapp' to prevent start
-OC_APP_BOOT_DELAY=0
-```
-
-## Build the OpenCentauri Firmware Image
-
-### Option 1: Manual Build
-
-1. Unpack the firmware of choice: (tested with 1.1.25)
-    `sudo ./unpack.sh FW-CentauriCarbon-v1.1.25-2025-05-09.bin`
-1. Run this patch set of updates to the squashfs extracted:
-    `sudo ./patch.sh`
-1. Generate a new update.swu:
-    `sudo ./pack.sh`
-
-### Option 2: Automatic Build
-
-1. Run through all the steps in Option 1, optionally specifying the firmware version to use (defaults to 1.1.25):
-    `./build.sh [version]`
-
-## Install to Printer
-
-1. Install to the printer (only works if already running OpenCentauri FW to install an update):
-    1. `./install.sh [--stage,--flash,--sendit] <printer-ip-or-hostname>`
-    1. Stages, flashes or stages and flashes the file generated in update/update.sw by `pack.sh`.
-    1. Run with no arguments for usage.
-1. Alternative (if just jailbroken but not running OpenCentauri yet):
-    1. Copy update/update.swu to USB stick, in the folder update, file update.swu
-    1. Reboot the printer and it should detect an update is available!
-
-## Special Commands on Printer
-1. `mount_usb`: Mounts the USB drive if available to /mnt/exUDISK like /app/app does
-1. `noapp`: Run after logging in if you configured an OC_APP_BOOT_DELAY to prevent app from starting this boot
