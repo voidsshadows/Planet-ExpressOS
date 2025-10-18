@@ -1,4 +1,0 @@
-id = "replace_bootlogo"
-name = "Replace bootlogo"
-compatible_versions = ["*"]
-after = ["base"]
