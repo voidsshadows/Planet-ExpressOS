@@ -2,5 +2,5 @@ id = "random_bootlogo_swapper"
 name = "Random Bootlogo Swapper"
 compatible_versions = ["*"]
 after = []
-execution_policy = "Always"
+execution_policy = "MatchesEnv"
 run = ["./patch.sh"]
