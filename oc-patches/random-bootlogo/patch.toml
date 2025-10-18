@@ -1,6 +1,14 @@
 id = "random_bootlogo"
+
 name = "Random Bootlogo"
-compatible_versions = ["*"]
-after = [base]
-execution_policy = "MatchesEnv"
+
+# Runs after the main system is initialized, which is safer than "base".
+after = ["init"]
+
+# This is the key part: ensures the script runs on every single boot.
+execution_policy = "Always"
+
+# Tells the patcher which script file to execute.
 run = ["./patch.sh"]
+
+compatible_versions = ["*"]
