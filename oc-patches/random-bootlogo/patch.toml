@@ -9,6 +9,5 @@ after = ["init"]
 execution_policy = "Always"
 
 # Tells the patcher which script file to execute.
-run = ["./patch.sh"]
 
 compatible_versions = ["*"]
