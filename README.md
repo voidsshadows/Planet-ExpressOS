@@ -47,7 +47,7 @@ If there are two versions of a script, the one with `-ac` in the name is the old
 - Chaos mode: scripts rewritten for fun and flexibility.  
 - Branding upgrades: pizza flair and “we don’t care” messaging baked in.  
 - Breakglass access: root shell port 4567 is ready for whatever you want to do.  
-- Default root password: now `PizzaExpress`. Change it if you like a little control.  
+- Default root password: now `OpenCentauri`. Change it if you like a little control.  
 - Optional surprises: small Easter eggs, humor, and chaos baked into scripts.  
 - Blackjack & hookers: because some things can’t be explained… only enjoyed.  
 
