@@ -1,5 +1,5 @@
-id = "random_bootlogo_swapper"
-name = "Random Bootlogo Swapper"
+id = "random_bootlogo"
+name = "Random Bootlogo"
 compatible_versions = ["*"]
 after = [base]
 execution_policy = "MatchesEnv"
