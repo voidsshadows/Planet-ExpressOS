@@ -8,7 +8,9 @@ OpenCentauri (OC) is solid: bug fixes, remote access, stability, and quality-of-
 
 In short:  
 - **OC** = “Let’s make firmware stable and responsible.”  
-- **Pizza Express OS** = “Everything OC does… but cooler, funnier, and slightly dangerous.”  
+- **Pizza Express OS** = “Everything OC does… but cooler, funnier, and slightly dangerous.”
+- ![Pizza Chaos](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzk2M2h3d2pja2ZlZHk1ZGNkY3dhYjZnNXFkMGE0N3pkaGJlcTRqeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cYhhUmbtbneb6/giphy.gif)
+
 
 ---
 
