@@ -20,7 +20,6 @@ In short:
 |---------|-------------|----------------|
 | Bug Fixes | ✅ | ✅ |
 | Remote Access | ✅ | ✅ + extras for chaos |
-| Default Root Password | OpenCentauri | `PizzaExpress` (change if you care) |
 | Root Shell Port | 4567 (Sims) | ✅ + full breakglass fun |
 | Branding/Flair | Minimal | Pizza-themed chaos |
 | Scripts | Stable | Stable + rewritten/tweaked for fun |
