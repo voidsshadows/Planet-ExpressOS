@@ -1,0 +1,4 @@
+id = "exploding_centauri"
+name = "exploding-centauri"
+compatible_versions = ["*"]
+after = ["base"]
